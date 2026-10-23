@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
@@ -31,7 +31,9 @@ jobs:
       - name: Run Scraper
         run: |
           cd scraper-code
-          python -m src.forexfactory.main --csv ../forex_factory_cache.csv --tz UTC --impact high,medium --keep-currencies USD
+          START_DATE=$(date -d "120 days ago" +%Y-%m-%d)
+          END_DATE=$(date +%Y-%m-%d)
+          python -m src.forexfactory.main --start $START_DATE --end $END_DATE --csv ../forex_factory_cache.csv --tz UTC --impact high,medium --keep-currencies USD
 
       - name: Commit and push CSV
         run: |
