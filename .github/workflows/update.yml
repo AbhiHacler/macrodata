@@ -1,9 +1,9 @@
 name: Update Forex Data
 
 on:
+  workflow_dispatch:
   schedule:
-    - cron: '0 */4 * * *' # Runs every 4 hours
-  workflow_dispatch: # Allows you to run it manually by clicking a button
+    - cron: '0 */4 * * *'
 
 permissions:
   contents: write
@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v4
